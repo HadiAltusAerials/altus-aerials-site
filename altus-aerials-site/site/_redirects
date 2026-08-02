@@ -1,0 +1,7 @@
+# The QR code already printed on business cards points to
+# https://www.altusaerials.com/contact (no .html extension).
+# Send that exact path to the Services page instead, so people scanning
+# printed cards see the full lineup before booking. This does NOT affect
+# /book.html, which is the site's own booking/contact page used by every
+# internal "Book Now" button and nav link.
+/contact   /services.html   301
