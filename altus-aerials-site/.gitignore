@@ -1,0 +1,5 @@
+# Local Netlify folder
+.netlify
+
+# Installed by Netlify during deploy (or by you locally with `npm install`)
+node_modules
