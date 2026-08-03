@@ -9,7 +9,7 @@
 // checkout is abandoned, the hold simply expires and stops counting against
 // availability — no manual cleanup needed.
 const crypto = require("crypto");
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 const rules = require("./_lib/rules");
 const { computeOpenSlots, isValidDateString } = require("./_lib/availability");
 
@@ -24,6 +24,10 @@ const PACKAGE_PRICES = {
 };
 
 exports.handler = async (event) => {
+  // Required for Netlify Blobs to work from a classic (Lambda-compatible)
+  // function handler in production — see availability.js for the full note.
+  connectLambda(event);
+
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }

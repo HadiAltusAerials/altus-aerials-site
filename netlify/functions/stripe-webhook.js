@@ -8,9 +8,13 @@
 // fires with a real, verified, successful payment, the slot is at most a
 // short-lived hold (see create-hold.js) that expires on its own.
 const Stripe = require("stripe");
-const { getStore } = require("@netlify/blobs");
+const { getStore, connectLambda } = require("@netlify/blobs");
 
 exports.handler = async (event) => {
+  // Required for Netlify Blobs to work from a classic (Lambda-compatible)
+  // function handler in production — see availability.js for the full note.
+  connectLambda(event);
+
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }

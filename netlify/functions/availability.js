@@ -1,9 +1,18 @@
 // GET /.netlify/functions/availability?date=YYYY-MM-DD
 // Returns the open (bookable) start times for that date, after excluding
 // closed days, blocked dates, confirmed bookings, and still-live holds.
+const { connectLambda } = require("@netlify/blobs");
 const { computeOpenSlots } = require("./_lib/availability");
 
 exports.handler = async (event) => {
+  // Required for Netlify Blobs to work from a classic (Lambda-compatible)
+  // function handler in production: it decodes the Blobs connection info
+  // Netlify attaches to `event` and makes it available to getStore() below.
+  // Without this, every getStore() call throws MissingBlobsEnvironmentError
+  // in production (it works locally without this because our local test
+  // harness fakes the store entirely).
+  connectLambda(event);
+
   if (event.httpMethod !== "GET") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
