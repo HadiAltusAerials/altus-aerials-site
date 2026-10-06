@@ -5,3 +5,6 @@
 # /book.html, which is the site's own booking/contact page used by every
 # internal "Book Now" button and nav link.
 /contact   /services.html   301
+
+# Client galleries are served by the Cloudflare Worker (photos live in Cloudflare R2, not Netlify).
+/gallery/*  https://altus-api.hadi-583.workers.dev/gallery/:splat  200

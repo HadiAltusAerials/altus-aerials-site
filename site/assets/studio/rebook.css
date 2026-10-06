@@ -1,0 +1,31 @@
+/* Extras for /rebook/ on top of the site's own /assets/css/style.css (read-only, not edited). */
+[hidden] { display: none !important; }
+.rebook-hero { padding: 70px 0 40px; }
+.rebook-eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 600; color: var(--blue-accent); }
+.rebook-section { padding: 30px 0 100px; }
+.rebook-form, .rebook-done { max-width: 640px; margin: 0 auto; }
+.rebook-form h3 { font-size: 22px; margin: 34px 0 14px; }
+.rebook-form h3:first-of-type { margin-top: 0; }
+
+.rebook-packages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.rebook-pkg {
+  position: relative; display: flex; flex-direction: column; gap: 2px; padding: 18px 16px; cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius); background: #fff;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.rebook-pkg:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(11, 37, 69, .08); }
+.rebook-pkg input { position: absolute; opacity: 0; pointer-events: none; }
+.rebook-pkg .tier-name { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.rebook-pkg .price { font-family: var(--serif); font-size: 30px; color: var(--ink); }
+.rebook-pkg .price sup { font-size: 14px; margin-right: 2px; }
+.rebook-pkg .tagline { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.rebook-pkg:has(input:checked) { border-color: var(--navy); background: linear-gradient(180deg, #fff 0%, var(--paper-soft) 100%); box-shadow: 0 0 0 2px var(--navy); }
+.rebook-pkg:has(input:focus-visible) { outline: 3px solid var(--blue-accent); outline-offset: 2px; }
+
+.rebook-prefill { font-size: 14px; margin: -4px 0 14px; }
+.rebook-clear { background: none; border: 0; padding: 0; color: var(--blue-accent); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.rebook-fine { font-size: 13px; margin-top: 12px; }
+.rebook-form .btn { width: 100%; }
+.rebook-done p { margin-bottom: 20px; }
+.form-field input, .form-field select, .form-field textarea { font-size: 16px; } /* stops iPhone zoom-on-focus */
+@media (min-width: 640px) { .rebook-form .btn { width: auto; } }

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Gallery Activity | Altus Studio</title>
+<link rel="icon" href="/assets/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/studio/studio.css">
+</head>
+<body>
+<header class="bar"><div class="in">
+  <a class="brand" href="/studio/upload/"><img src="/assets/images/logo-white.png" alt="Altus Aerials logo"> <span class="brand-text">Altus Aerials</span><span class="studio-tag">Studio</span></a>
+  <nav><a href="/studio/upload/">Deliver</a><a href="/studio/activity/" aria-current="page">Activity</a></nav>
+</div></header>
+<main class="page" id="app"><p class="muted">Loading…</p></main>
+<script src="/assets/studio/config.js"></script>
+<script src="/assets/studio/studio.js"></script>
+<script>
+(function () {
+  "use strict";
+  var S = window.Studio, esc = S.esc, app = document.getElementById("app"), data = null, tab = "galleries";
+  var DAY = 864e5;
+  function fmtDate(ms) { return ms ? new Date(ms).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—"; }
+  function ago(ms) {
+    if (!ms) return "—"; var m = Math.round((Date.now() - ms) / 6e4);
+    return m < 60 ? m + " min ago" : m < 1440 ? Math.round(m / 60) + " hr ago" : Math.round(m / 1440) + " days ago";
+  }
+  function daysSince(iso) { if (!iso) return null; return Math.floor((Date.now() - new Date(iso + "T12:00:00").getTime()) / DAY); }
+  function n(v) { return v ? v : '<span class="muted">0</span>'; }
+
+  S.requireKey(app, load);
+  function load() {
+    S.api("/api/studio/activity").then(function (d) { data = d; render(); }, function (e) { app.innerHTML = '<p class="note bad">' + esc(e.message) + '</p>'; });
+  }
+  function render() {
+    var g = data.galleries, unopened = g.filter(function (x) { return !x.opens && Date.now() - x.created_at > DAY; });
+    var opened7 = g.filter(function (x) { return x.last_seen && Date.now() - x.last_seen < 7 * DAY; }).length;
+    var req = data.bookings.filter(function (b) { return b.status === "requested"; }).length;
+    var due = data.agents.filter(function (a) { var d = daysSince(a.last); return d != null && d >= 30; }).length;
+    app.innerHTML =
+      '<div class="card-head"><div><h1>Activity</h1><p class="lede">Who opened their gallery, what they downloaded, and which agents are due for a call.</p></div>' +
+      '<button class="btn btn-outline" type="button" id="refresh">Refresh</button></div>' +
+      '<div class="stats">' +
+        stat(g.length, "galleries delivered") + stat(opened7, "opened in the last 7 days") +
+        stat(unopened.length, "not opened after a day") + stat(req, "booking requests waiting") + stat(due, "agents 30+ days since last shoot") +
+      '</div>' +
+      '<div class="tabs" role="tablist">' + tabBtn("galleries", "Galleries") + tabBtn("agents", "Agents") + tabBtn("bookings", "Booking requests" + (req ? " (" + req + ")" : "")) + '</div>' +
+      '<div id="panel"></div>' +
+      (data.source !== "flightpath" ? '<p class="muted">Last-shoot dates come from delivered galleries and booking requests until Flightpath is connected.</p>' : '');
+    document.getElementById("refresh").onclick = load;
+    app.querySelectorAll("[role=tab]").forEach(function (b) { b.onclick = function () { tab = b.dataset.tab; render(); }; });
+    var p = document.getElementById("panel");
+    p.innerHTML = tab === "galleries" ? galleries() : tab === "agents" ? agents() : bookings();
+  }
+  function stat(v, label) { return '<div class="stat"><b>' + v + '</b><span>' + label + '</span></div>'; }
+  function tabBtn(id, label) { return '<button type="button" role="tab" data-tab="' + id + '" aria-selected="' + (tab === id) + '">' + label + '</button>'; }
+
+  function galleries() {
+    if (!data.galleries.length) return '<div class="card"><p style="margin:0">No galleries yet. Deliver your first shoot from the Deliver tab.</p></div>';
+    return '<div class="tablewrap"><table><thead><tr><th>Gallery</th><th>Status</th><th class="num">Opens</th><th>Last seen</th><th class="num">Zip</th><th class="num">Saves</th><th class="num">Tour</th><th class="num">Shares</th><th class="num">Book clicks</th></tr></thead><tbody>' +
+      data.galleries.map(function (x) {
+        var status = !x.opens ? (Date.now() - x.created_at > DAY ? '<span class="pill bad">Not opened</span>' : '<span class="pill">Sent</span>') :
+          x.zips ? '<span class="pill good">Downloaded</span>' : '<span class="pill warn">Opened</span>';
+        return '<tr><td><a href="/gallery/' + esc(x.slug) + '/" target="_blank" rel="noopener"><b>' + esc(x.address) + '</b></a>' + (x.locked ? ' <span class="pill">Locked</span>' : '') +
+          '<span class="sub">' + esc([x.package, x.agent_name, "delivered " + fmtDate(x.created_at)].filter(Boolean).join(" · ")) + '</span></td>' +
+          '<td>' + status + '</td><td class="num">' + n(x.opens) + (x.visitors > 1 ? '<span class="sub">' + x.visitors + ' people</span>' : '') + '</td>' +
+          '<td>' + ago(x.last_seen) + '</td><td class="num">' + n(x.zips) + '</td><td class="num">' + n(x.saves) + '</td><td class="num">' + n(x.tour) + '</td><td class="num">' + n(x.shares) + '</td><td class="num">' + n(x.book_clicks) + '</td></tr>';
+      }).join("") + '</tbody></table></div>';
+  }
+  function agents() {
+    var list = data.agents.slice().sort(function (a, b) { return (daysSince(b.last) || 0) - (daysSince(a.last) || 0); });
+    if (!list.length) return '<div class="card"><p style="margin:0">Agents show up here once a gallery is delivered with their mobile number.</p></div>';
+    return '<div class="tablewrap"><table><thead><tr><th>Agent</th><th>Mobile</th><th>Last / next shoot</th><th class="num">Days since</th><th class="num">Galleries</th></tr></thead><tbody>' +
+      list.map(function (a) {
+        var d = daysSince(a.last), pill = d == null ? "—" : d < 0 ? '<span class="pill good">Booked</span>' : d >= 60 ? '<span class="pill bad">' + d + '</span>' : d >= 30 ? '<span class="pill warn">' + d + '</span>' : '<span class="pill good">' + d + '</span>';
+        return '<tr><td><b>' + esc(a.name || "Unknown") + '</b></td><td>' + esc(a.phone) + '</td><td>' + esc(a.last || "—") + '</td><td class="num">' + pill + '</td><td class="num">' + a.shoots + '</td></tr>';
+      }).join("") + '</tbody></table></div>';
+  }
+  function bookings() {
+    if (!data.bookings.length) return '<div class="card"><p style="margin:0">No booking requests yet. They come from the "Book your next shoot" button on every gallery.</p></div>';
+    return '<div class="tablewrap"><table><thead><tr><th>Requested</th><th>Who</th><th>Property</th><th>Package</th><th>Wants</th><th>Notes</th></tr></thead><tbody>' +
+      data.bookings.map(function (b) {
+        return '<tr><td>' + fmtDate(b.created_at) + '<span class="sub">' + (b.flightpath_id ? "In Flightpath" : "Not in Flightpath yet") + '</span></td>' +
+          '<td><b>' + esc(b.name) + '</b><span class="sub">' + esc(b.phone) + (b.email ? " · " + esc(b.email) : "") + '</span></td>' +
+          '<td>' + esc(b.address) + '<span class="sub">' + esc(b.city || "") + (b.from_slug ? " · from " + esc(b.from_slug) : "") + '</span></td>' +
+          '<td>' + esc(b.package) + '</td><td>' + esc(b.date) + '<span class="sub">' + esc(b.time_window || "") + '</span></td>' +
+          '<td style="white-space:normal;min-width:180px">' + esc(b.notes || "") + '</td></tr>';
+      }).join("") + '</tbody></table></div>';
+  }
+})();
+</script>
+</body>
+</html>

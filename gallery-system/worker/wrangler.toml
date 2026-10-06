@@ -1,0 +1,17 @@
+# Used for local testing (wrangler dev) and optional CLI deploys later.
+name = "altus-api"
+main = "dist/worker.js"
+compatibility_date = "2026-09-01"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "altus-galleries"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "altus-db"
+database_id = "REPLACE-WITH-D1-ID"
+
+[vars]
+PUBLIC_ORIGIN = ""
+AUTO_SEND = "false"
