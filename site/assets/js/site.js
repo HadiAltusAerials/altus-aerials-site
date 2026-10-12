@@ -97,8 +97,10 @@
       gsap.from(".trust li", { opacity: 0, duration: .8, stagger: .12, ease: "none",
         scrollTrigger: { trigger: ".trust", start: "top 90%", once: true } });
       /* Closing CTA: clean rise */
-      gsap.from(".closing .wrap > *", { y: 30, opacity: 0, duration: .8, stagger: .1, ease: "power2.out",
-        scrollTrigger: { trigger: ".closing", start: "top 80%", once: true } });
+      // fromTo with explicit end values + clearProps: the button has its own CSS transform transition,
+      // which made a plain from() settle 30px low and threw off the spacing.
+      gsap.fromTo(".closing .wrap > *", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .8, stagger: .1, ease: "power2.out",
+        clearProps: "transform,opacity", scrollTrigger: { trigger: ".closing", start: "top 80%", once: true } });
     });
   }
 
