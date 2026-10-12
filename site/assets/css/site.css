@@ -240,8 +240,8 @@ h2.section-title { font-size: clamp(32px, 6vw, 56px); line-height: 1.05; }
 /* ---------- Closing CTA ---------- */
 .closing { background: var(--navy-deep); padding-block: 96px 88px; text-align: center; }
 .closing h2 { font-size: clamp(38px, 7vw, 68px); line-height: 1.05; color: var(--white); }
-.closing .btn { margin-top: 28px; }
-.closing .call { margin: 60px 0 0; color: var(--on-dark-muted); font-size: 16px; }
+.closing .btn { margin-top: 48px; }
+.closing .call { margin: 46px 0 0; color: var(--on-dark-muted); font-size: 16px; }
 .closing .call a { color: var(--white); font-weight: 600; text-decoration-color: rgba(255, 255, 255, .4); text-underline-offset: 4px; white-space: nowrap; }
 
 /* ---------- Footer ---------- */
