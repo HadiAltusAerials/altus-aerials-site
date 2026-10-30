@@ -129,7 +129,7 @@
   }
 
   function rebookHtml() {
-    var pk = [["Overview", 149, "Exterior aerial photos"], ["Showcase", 349, "Aerial photos + video, full interiors"], ["Signature", 499, "Showcase + 3D tour + floor plans"], ["Summit", 649, "Signature + cinematic FPV fly-through"]];
+    var pk = [["Overview", 149, "Exterior aerial photos"], ["Showcase", 349, "Aerial photos + full interiors"], ["Signature", 499, "Showcase + 3D tour + floor plans"], ["Summit", 649, "Signature + short-form video"]];
     return '<section class="rebook" id="book"><div class="wrap"><h2>Got another listing coming up?</h2>' +
       '<p>Pick a package and a date. No account needed. Hadi confirms by text, usually the same day.</p>' +
       '<div class="pkgs">' + pk.map(function (p) {

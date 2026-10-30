@@ -76,6 +76,26 @@
       });
     });
 
+    // ---- Summit video style picker (only shown for Summit) ----
+    var styleField = document.getElementById("video-style-field");
+    var style2Field = document.getElementById("video-style-2-field");
+    var styleSelect = document.getElementById("shoot-video-style");
+    var style2Select = document.getElementById("shoot-video-style-2");
+    var syncVideoStyle = function () {
+      if (!styleField || !styleSelect) return;
+      var isSummit = packageSelect.value === "Summit";
+      styleField.hidden = !isSummit;
+      if (style2Field) style2Field.hidden = !isSummit;
+      styleSelect.required = isSummit;
+      if (!isSummit) {
+        styleSelect.value = "";
+        if (style2Select) style2Select.value = "";
+      }
+    };
+    packageSelect.addEventListener("change", syncVideoStyle);
+    packageButtons.forEach(function (btn) { btn.addEventListener("click", syncVideoStyle); });
+    syncVideoStyle();
+
     // ---- Live availability slot picker ----
     var dateInput = document.getElementById("shoot-pick-date");
     var slotsContainer = document.getElementById("shoot-slots");
@@ -184,7 +204,13 @@
         phone: formData.get("phone"),
         address: formData.get("address"),
         shootType: formData.get("shoot_type"),
-        notes: formData.get("notes"),
+        notes: (function () {
+          var n = formData.get("notes") || "";
+          var v1 = formData.get("video_style"), v2 = formData.get("video_style_2");
+          if (formData.get("package") !== "Summit" || !v1) return n;
+          var line = "Video style: " + v1 + (v2 ? " + second style: " + v2 + " (+$150)" : "");
+          return n ? line + "\n" + n : line;
+        })(),
         referral: formData.get("referral_source"),
       };
 

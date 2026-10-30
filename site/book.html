@@ -80,7 +80,7 @@
         <li class="pick">
           <h3>Summit</h3>
           <p class="price"><sup>$</sup>649</p>
-          <ul class="ticks"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Aerial photos</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Full interior photography (25+ HDR photos)</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>3D/360° tour</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>FPV flythrough video tour</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Floor plans</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Priority delivery</span></li></ul>
+          <ul class="ticks"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Signature (aerials, 25+ interior photos, 3D tour, floor plans)</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>1 short-form video, you pick the style</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Priority delivery: photos in 24 hours, video in 48</span></li></ul>
           <a href="#shoot-form" data-package="Summit" class="btn btn-outline package-select">Select this package</a>
         </li>
       </ul>
@@ -143,6 +143,22 @@
               <option value="Signature" data-price="499">Signature &mdash; $499</option>
               <option value="Summit" data-price="649">Summit &mdash; $649</option>
             </optgroup>
+          </select>
+        </div>
+
+        <div class="form-field" id="video-style-field" hidden>
+          <label for="shoot-video-style">Which video style do you want? <a class="text-link" href="/services#video-menu" target="_blank" rel="noopener">See the styles</a></label>
+          <select id="shoot-video-style" name="video_style">
+            <option value="">Select a style&hellip;</option>
+            <option value="Highlight Reel">Highlight Reel</option><option value="Walkthrough">Walkthrough</option><option value="Agent Intro Reel">Agent Intro Reel (you on camera)</option><option value="Agent-Led Tour">Agent-Led Tour (you on camera)</option>
+          </select>
+        </div>
+
+        <div class="form-field" id="video-style-2-field" hidden>
+          <label for="shoot-video-style-2">Add a second video style? (+$150, optional)</label>
+          <select id="shoot-video-style-2" name="video_style_2">
+            <option value="">No thanks</option>
+            <option value="Highlight Reel">Highlight Reel</option><option value="Walkthrough">Walkthrough</option><option value="Agent Intro Reel">Agent Intro Reel (you on camera)</option><option value="Agent-Led Tour">Agent-Led Tour (you on camera)</option>
           </select>
         </div>
 

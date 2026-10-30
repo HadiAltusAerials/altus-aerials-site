@@ -401,3 +401,24 @@ h2.section-title { font-size: clamp(32px, 6vw, 56px); line-height: 1.05; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ---------- Summit video menu ---------- */
+.video-menu { background: var(--paper); color: var(--ink); padding-block: 56px 72px; }
+.video-menu .eyebrow { color: var(--blue); }
+.video-menu h2 { font: 500 clamp(30px, 5vw, 44px)/1.1 var(--serif); margin: 0; color: var(--ink); }
+.video-menu .lede { margin: 14px 0 28px; max-width: 60ch; color: var(--muted); }
+.vm-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+@media (min-width: 680px) { .vm-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .vm-grid { grid-template-columns: repeat(3, 1fr); } }
+.vm-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; min-width: 0; }
+.vm-card h3 { margin: 12px 0 4px; font: 600 20px/1.25 var(--sans); color: var(--ink); }
+.vm-card p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
+.vm-card .vm-len { margin-bottom: 10px; font-size: 13px; color: var(--muted); }
+.vm-tag { display: inline-block; padding: 5px 10px; border-radius: 999px; background: var(--line); color: var(--navy); font: 600 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.vm-tag.on { background: var(--navy); color: var(--white); }
+.vm-card.soon { background: transparent; border-style: dashed; }
+.vm-card.soon p { color: var(--muted); }
+.vm-includes { margin-top: 28px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.vm-includes h3 { margin: 0 0 8px; font: 600 13px/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+@media (min-width: 900px) { .vm-includes .ticks { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; } .vm-includes .ticks li:nth-child(2) { border-top: 0; } .video-menu { padding-block: 80px 96px; } }
+.pkg-copy .text-link { margin-top: 14px; align-self: flex-start; }
