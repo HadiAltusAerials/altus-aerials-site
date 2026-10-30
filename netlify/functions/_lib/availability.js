@@ -16,6 +16,12 @@ function parseISODate(dateStr) {
   return new Date(Date.UTC(y, m - 1, d));
 }
 
+// Start times for a given day of the week (per-day override if set).
+function startTimesForDay(dayOfWeek) {
+  const byDay = rules.startTimesByDay || {};
+  return byDay[dayOfWeek] || rules.startTimes;
+}
+
 function isValidDateString(dateStr) {
   return /^\d{4}-\d{2}-\d{2}$/.test(dateStr) && parseISODate(dateStr) !== null;
 }
@@ -65,7 +71,7 @@ async function computeOpenSlots(dateStr) {
 
   const taken = await getBookedTimesForDate(dateStr);
 
-  const openSlots = rules.startTimes.filter((time) => {
+  const openSlots = startTimesForDay(dayOfWeek).filter((time) => {
     if (taken.has(time)) return false;
 
     const [hh, mm] = time.split(":").map(Number);
@@ -78,4 +84,4 @@ async function computeOpenSlots(dateStr) {
   return { date: dateStr, slots: openSlots };
 }
 
-module.exports = { computeOpenSlots, isValidDateString, getBookedTimesForDate, pad };
+module.exports = { computeOpenSlots, isValidDateString, getBookedTimesForDate, startTimesForDay, pad };

@@ -24,4 +24,7 @@ function getStore(name) {
   };
 }
 
-module.exports = { getStore, __stores: stores };
+// The real functions call connectLambda(event) first; locally it does nothing.
+function connectLambda() {}
+
+module.exports = { getStore, connectLambda, __stores: stores };

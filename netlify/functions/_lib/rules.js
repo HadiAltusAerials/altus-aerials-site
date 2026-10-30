@@ -9,12 +9,18 @@
 
 module.exports = {
   // Which days of the week you're bookable. 0 = Sunday, 1 = Monday, ... 6 = Saturday.
-  // Default below: Monday through Saturday, closed Sundays.
-  bookableDays: [1, 2, 3, 4, 5, 6],
+  // Monday through Friday only.
+  bookableDays: [1, 2, 3, 4, 5],
 
   // Start times you're willing to begin a shoot, in 24-hour "HH:MM" format.
-  // Default below: every 2 hours from 8am to 4pm (last start time 4pm).
-  startTimes: ["08:00", "10:00", "12:00", "14:00", "16:00"],
+  // Every 2 hours inside 9am to 5pm (last start 3pm, done by 5pm).
+  startTimes: ["09:00", "11:00", "13:00", "15:00"],
+
+  // Optional per-day override of startTimes (0 = Sunday ... 6 = Saturday).
+  // Monday ends early: last start 1pm so nothing runs past 3pm.
+  startTimesByDay: {
+    1: ["09:00", "11:00", "13:00"],
+  },
 
   // How long a booking occupies on the schedule, in minutes, regardless of
   // package. (Simple v1 — every package blocks the same size window. If your

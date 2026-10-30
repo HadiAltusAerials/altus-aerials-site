@@ -43,8 +43,8 @@ function test(name, fn) {
 // rules. We just pick "30 days from now" and adjust to a bookable weekday.
 function futureDateStr(daysAhead) {
   const d = new Date(Date.now() + daysAhead * 24 * 60 * 60 * 1000);
-  // Nudge forward until it's Mon-Sat (rules.bookableDays = [1..6]).
-  while (d.getUTCDay() === 0) {
+  // Nudge forward to a Tuesday-Friday (bookable, and no Monday override).
+  while (d.getUTCDay() < 2 || d.getUTCDay() > 5) {
     d.setUTCDate(d.getUTCDate() + 1);
   }
   return d.toISOString().slice(0, 10);
@@ -65,11 +65,11 @@ async function main() {
     assert.strictEqual(body.error, "invalid_date");
   });
 
-  await test("availability: returns all 5 slots open on a fresh future weekday", async () => {
+  await test("availability: returns all 4 slots open on a fresh future weekday", async () => {
     const res = await availabilityFn.handler({ httpMethod: "GET", queryStringParameters: { date: testDate } });
     const body = JSON.parse(res.body);
     assert.strictEqual(res.statusCode, 200);
-    assert.deepStrictEqual(body.slots, ["08:00", "10:00", "12:00", "14:00", "16:00"]);
+    assert.deepStrictEqual(body.slots, ["09:00", "11:00", "13:00", "15:00"]);
   });
 
   await test("availability: Sundays are closed", async () => {
@@ -84,7 +84,7 @@ async function main() {
 
   const holdPayload = {
     date: testDate,
-    time: "10:00",
+    time: "11:00",
     package: "Signature",
     name: "Test Client",
     email: "test@example.com",
@@ -112,7 +112,7 @@ async function main() {
   await test("availability: the just-held slot no longer shows as open", async () => {
     const res = await availabilityFn.handler({ httpMethod: "GET", queryStringParameters: { date: testDate } });
     const body = JSON.parse(res.body);
-    assert.ok(!body.slots.includes("10:00"), "10:00 should be held, got slots=" + JSON.stringify(body.slots));
+    assert.ok(!body.slots.includes("11:00"), "11:00 should be held, got slots=" + JSON.stringify(body.slots));
   });
 
   await test("create-hold: a second person can't grab the same held slot", async () => {
@@ -128,7 +128,7 @@ async function main() {
   await test("create-hold: a different time on the same date still works", async () => {
     const res = await createHoldFn.handler({
       httpMethod: "POST",
-      body: JSON.stringify(Object.assign({}, holdPayload, { time: "12:00", email: "third@example.com" })),
+      body: JSON.stringify(Object.assign({}, holdPayload, { time: "13:00", email: "third@example.com" })),
     });
     assert.strictEqual(res.statusCode, 200);
   });
@@ -142,7 +142,7 @@ async function main() {
     id: "cs_test_123",
     object: "checkout.session",
     client_reference_id: bookingId,
-    amount_total: 34900,
+    amount_total: 49900,
     customer_details: { email: "test@example.com" },
   };
   const eventPayload = JSON.stringify({
@@ -154,6 +154,36 @@ async function main() {
   const header = stripeTestClient.webhooks.generateTestHeaderString({
     payload: eventPayload,
     secret: webhookSecret,
+  });
+
+  await test("availability: Saturdays are closed", async () => {
+    const d = new Date(testDate + "T00:00:00Z");
+    while (d.getUTCDay() !== 6) d.setUTCDate(d.getUTCDate() + 1);
+    const res = await availabilityFn.handler({ httpMethod: "GET", queryStringParameters: { date: d.toISOString().slice(0, 10) } });
+    assert.deepStrictEqual(JSON.parse(res.body).slots, []);
+  });
+
+  await test("availability: Mondays end with a 1pm start", async () => {
+    const d = new Date(testDate + "T00:00:00Z");
+    while (d.getUTCDay() !== 1) d.setUTCDate(d.getUTCDate() + 1);
+    const res = await availabilityFn.handler({ httpMethod: "GET", queryStringParameters: { date: d.toISOString().slice(0, 10) } });
+    assert.deepStrictEqual(JSON.parse(res.body).slots, ["09:00", "11:00", "13:00"]);
+  });
+
+  await test("create-hold: Summit can be booked", async () => {
+    const res = await createHoldFn.handler({
+      httpMethod: "POST",
+      body: JSON.stringify(Object.assign({}, holdPayload, { time: "15:00", package: "Summit", email: "summit@example.com" })),
+    });
+    assert.strictEqual(res.statusCode, 200, res.body);
+  });
+
+  await test("create-hold: retired packages are rejected", async () => {
+    const res = await createHoldFn.handler({
+      httpMethod: "POST",
+      body: JSON.stringify(Object.assign({}, holdPayload, { time: "09:00", package: "Occasion", email: "old@example.com" })),
+    });
+    assert.strictEqual(JSON.parse(res.body).error, "invalid_package");
   });
 
   await test("stripe-webhook: rejects a bad signature", async () => {
@@ -179,7 +209,7 @@ async function main() {
   await test("availability: the paid slot stays unavailable after the hold is gone", async () => {
     const res = await availabilityFn.handler({ httpMethod: "GET", queryStringParameters: { date: testDate } });
     const body = JSON.parse(res.body);
-    assert.ok(!body.slots.includes("10:00"), "paid 10:00 slot should still be blocked, got " + JSON.stringify(body.slots));
+    assert.ok(!body.slots.includes("11:00"), "paid 11:00 slot should still be blocked, got " + JSON.stringify(body.slots));
   });
 
   await test("stripe-webhook: handles payment with no matching hold (manual-review fallback) without crashing", async () => {

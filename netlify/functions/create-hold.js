@@ -15,12 +15,9 @@ const { computeOpenSlots, isValidDateString } = require("./_lib/availability");
 
 const PACKAGE_PRICES = {
   Overview: 149,
-  Showcase: 249,
-  Signature: 349,
-  Occasion: 449,
-  Inspection: 129,
-  "Claim Documentation": 179,
-  "Progress Documentation": 299,
+  Showcase: 349,
+  Signature: 499,
+  Summit: 649,
 };
 
 exports.handler = async (event) => {
@@ -47,7 +44,8 @@ exports.handler = async (event) => {
   if (!isValidDateString(date)) {
     return jsonResponse(400, { error: "invalid_date" });
   }
-  if (!rules.startTimes.includes(time)) {
+  const allTimes = new Set([].concat(rules.startTimes, ...Object.values(rules.startTimesByDay || {})));
+  if (!allTimes.has(time)) {
     return jsonResponse(400, { error: "invalid_time" });
   }
   if (!(pkg in PACKAGE_PRICES)) {
