@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Listing Toolkit | Altus Aerials</title>
+<meta name="description" content="Ready-to-send seller texts and a photo prep guide for every listing. Fill in your details once, then tap to copy.">
+<link rel="canonical" href="https://altusaerials.com/toolkit">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Altus Aerials">
+<meta property="og:title" content="The Listing Toolkit">
+<meta property="og:description" content="Ready-to-send seller texts and a photo prep guide for every listing.">
+<meta property="og:url" content="https://altusaerials.com/toolkit">
+<meta property="og:image" content="https://altusaerials.com/assets/images/portfolio/twilight-rado-1200.jpg">
+<meta name="theme-color" content="#050d18">
+<link rel="icon" href="/assets/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+<style>
+/* ---------- Listing toolkit (agent-facing; uses site.css tokens) ---------- */
+.tk-page { background: var(--night); }
+.tk-wrap { width: 100%; max-width: 720px; margin: 0 auto; padding-inline: var(--gutter); }
+
+.tk-hero { position: relative; isolation: isolate; overflow: hidden; padding: calc(var(--header-h) + 52px) 0 24px; }
+.tk-hero-media { position: absolute; inset: 0 0 auto 0; height: 380px; z-index: -2; }
+.tk-hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.tk-hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(5,13,24,.5) 0%, rgba(5,13,24,.74) 45%, var(--night) 380px); }
+.tk-hero h1 { font-size: clamp(42px, 12vw, 66px); line-height: 1; color: var(--white); }
+.tk-hero .lede { margin-top: 14px; color: var(--on-dark); }
+
+/* Details panel */
+.tk-details { margin-top: 24px; padding: 20px 18px; border-radius: var(--radius); background: rgba(255,255,255,.05); border: 1px solid var(--on-dark-line); }
+.tk-details h2 { font: 600 12px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--blue-light); }
+.tk-details p { margin: 6px 0 14px; font-size: 14px; color: var(--on-dark-muted); }
+.tk-fields { display: grid; gap: 10px; }
+@media (min-width: 560px) { .tk-fields { grid-template-columns: 1fr 1fr; } }
+.tk-help { display: block; margin-top: 6px; font-size: 13px; color: var(--on-dark-muted); }
+.tk-field label { display: block; margin-bottom: 6px; font: 500 13px/1.2 var(--sans); color: var(--on-dark); }
+.tk-input, .tk-area {
+  width: 100%; min-height: 48px; padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--on-dark-line);
+  background: rgba(255,255,255,.06); color: var(--white); font: 400 16px/1.3 var(--sans);
+}
+.tk-area { min-height: 76px; resize: vertical; }
+.tk-input::placeholder, .tk-area::placeholder { color: rgba(255,255,255,.4); }
+.tk-input:focus, .tk-area:focus { outline: none; border-color: var(--blue-light); background: rgba(255,255,255,.09); }
+
+/* Tool cards */
+.tk-section-label { margin: 34px 0 12px; font: 600 12px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark-muted); }
+.tk-cards { display: grid; gap: 14px; }
+.tk-card { padding: 22px 18px; border-radius: var(--radius); border: 1px solid var(--on-dark-line); background: linear-gradient(180deg, rgba(18,48,90,.38), rgba(7,26,51,.38)); }
+.tk-when { display: block; margin-bottom: 8px; font: 600 11px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--blue-light); }
+.tk-card h3 { font-size: 24px; line-height: 1.15; color: var(--white); }
+.tk-card > p { margin: 8px 0 0; font-size: 15px; color: var(--on-dark-muted); }
+.tk-msg { margin-top: 14px; padding: 16px; border-radius: var(--radius-sm); background: rgba(5,13,24,.6); border: 1px solid var(--on-dark-line);
+  font: 400 15px/1.55 var(--sans); color: var(--on-dark); white-space: pre-wrap; overflow-wrap: anywhere; }
+.tk-msg mark { background: rgba(142,197,255,.16); color: var(--blue-light); border-radius: 4px; padding: 0 3px; }
+.tk-mini { display: grid; gap: 10px; margin-top: 14px; }
+@media (min-width: 560px) { .tk-mini.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+.tk-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.tk-btns .btn { min-height: 44px; padding: 11px 20px; font-size: 13px; }
+.tk-copy.is-copied { background: var(--blue-light); color: var(--night); }
+
+/* Short checklist card */
+.tk-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 0; }
+.tk-list li { display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 11px 0; border-top: 1px solid var(--on-dark-line); font-size: 15px; color: var(--on-dark); }
+.tk-list li b { font-weight: 500; color: var(--blue-light); }
+@media (max-width: 479px) { .tk-list li { grid-template-columns: 1fr; gap: 2px; } }
+
+/* Offer (agent layer only) */
+.tk-offer { margin: 34px 0 64px; padding: 28px 22px; border-radius: var(--radius); background: var(--navy); border: 1px solid rgba(142,197,255,.25); }
+.tk-offer .eyebrow { margin-bottom: 10px; }
+.tk-offer h2 { font-size: clamp(26px, 6.6vw, 34px); line-height: 1.1; color: var(--white); }
+.tk-offer p { margin: 12px 0 0; color: var(--on-dark); }
+.tk-offer .terms { margin-top: 10px; font-size: 14px; color: var(--on-dark-muted); }
+.tk-offer .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.tk-offer .fine { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,.5); }
+
+@media (min-width: 768px) {
+  .tk-hero { padding-top: calc(var(--header-h) + 84px); }
+  .tk-card { padding: 26px 26px; }
+  .tk-details { padding: 24px 24px; }
+}
+</style>
+</head>
+<body class="tk-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head is-solid">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/images/logo-white.png" alt="" width="50" height="32"><span>Altus Aerials</span></a>
+    <nav class="nav" aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/services">Packages</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+      <a class="btn btn-light nav-cta" href="/book">Book a shoot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="tk-hero">
+    <div class="tk-hero-media" aria-hidden="true"><picture><source type="image/webp" srcset="/assets/images/portfolio/twilight-rado-480.webp 480w, /assets/images/portfolio/twilight-rado-800.webp 800w, /assets/images/portfolio/twilight-rado-1200.webp 1200w" sizes="100vw"><img src="/assets/images/portfolio/twilight-rado-800.jpg" alt="" width="1673" height="940" fetchpriority="high"></picture></div>
+    <div class="tk-wrap">
+      <span class="eyebrow">The listing toolkit</span>
+      <h1>Seen to sold.</h1>
+      <p class="lede">The texts and the seller guide that make you look organized on every listing. Fill in the details once, then tap to copy.</p>
+
+      <div class="tk-details">
+        <h2>Your details</h2>
+        <p>These fill into every message below. They stay on your phone.</p>
+        <div class="tk-fields">
+          <div class="tk-field"><label for="f-agent">Your name</label><input class="tk-input" id="f-agent" data-f="agent" placeholder="Jane Smith" autocomplete="name"></div>
+          <div class="tk-field"><label for="f-seller">Seller's first name</label><input class="tk-input" id="f-seller" data-f="seller" placeholder="Mike"></div>
+          <div class="tk-field" style="grid-column: 1 / -1"><label for="f-address">Property address</label><input class="tk-input" id="f-address" data-f="address" placeholder="123 Main St"></div>
+          <div class="tk-field" style="grid-column: 1 / -1"><label for="f-link">Listing link</label><input class="tk-input" id="f-link" data-f="link" placeholder="Paste the link you want buyers to see" inputmode="url"><span class="tk-help">Your Zillow listing works, or the listing page on your own or your brokerage's website.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tk-wrap">
+    <p class="tk-section-label">The quick version</p>
+    <div class="tk-cards">
+      <article class="tk-card">
+        <span class="tk-when">The short checklist</span>
+        <h3>Seen to sold, on one card</h3>
+        <ul class="tk-list">
+          <li><b>Win the listing</b><span>Post Reels with you on camera.</span></li>
+          <li><b>Get it ready</b><span>Send the seller prep guide. Fix what an inspector will flag.</span></li>
+          <li><b>Launch day</b><span>Everything live at once. Post the same day.</span></li>
+          <li><b>Make them stop</b><span>Pick the cover. 16 to 21 photos in walking order.</span></li>
+          <li><b>Showings</b><span>Floor plan, 3D tour, follow up every sign-in.</span></li>
+          <li><b>If it's sitting</b><span>New cover, reorder, relaunch. Then price.</span></li>
+          <li><b>After closing</b><span>Post the sold story. Ask for the review.</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="tk-section-label">For your sellers, in listing order</p>
+    <div class="tk-cards" id="tk-cards">
+
+      <article class="tk-card">
+        <span class="tk-when">When the shoot is booked</span>
+        <h3>Seller photo prep guide</h3>
+        <p>A one-page guide your seller can open on their phone: what to do a few days before, the night before, and the morning of. Your name is on it.</p>
+        <div class="tk-mini"><div class="tk-field"><label for="f-shootday">Shoot day</label><input class="tk-input" id="f-shootday" data-f="shootday" placeholder="Thursday at 10am"></div></div>
+        <div class="tk-msg" data-tpl="prep"></div>
+        <div class="tk-btns">
+          <button class="btn btn-light tk-copy" type="button" data-copy="prep">Copy text</button>
+          <a class="btn btn-ghost" id="tk-prep-open" href="/seller-prep" target="_blank" rel="noopener">See the guide</a>
+        </div>
+      </article>
+
+      <article class="tk-card">
+        <span class="tk-when">Launch day</span>
+        <h3>"Your home is live"</h3>
+        <p>Sets expectations on day one, so your seller knows what to expect.</p>
+                <div class="tk-msg" data-tpl="live"></div>
+        <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="live">Copy text</button></div>
+      </article>
+
+      <article class="tk-card">
+        <span class="tk-when">When your seller asks for an update</span>
+        <h3>The seller update</h3>
+        <p>For when your seller asks how it's going. Fill in the numbers from your listing stats and send.</p>
+        <div class="tk-mini cols-3">
+          <div class="tk-field"><label for="f-views">Views</label><input class="tk-input" id="f-views" data-f="views" inputmode="numeric" placeholder="1,240"></div>
+          <div class="tk-field"><label for="f-saves">Saves</label><input class="tk-input" id="f-saves" data-f="saves" inputmode="numeric" placeholder="38"></div>
+          <div class="tk-field"><label for="f-showings">Showings</label><input class="tk-input" id="f-showings" data-f="showings" inputmode="numeric" placeholder="5"></div>
+        </div>
+        <div class="tk-mini">
+          <div class="tk-field"><label for="f-feedback">Feedback</label><input class="tk-input" id="f-feedback" data-f="feedback" placeholder="Buyers love the kitchen; a few asked about the basement"></div>
+          <div class="tk-field"><label for="f-next">Next step</label><input class="tk-input" id="f-next" data-f="next" placeholder="Open house Sunday 1 to 3"></div>
+        </div>
+        <div class="tk-msg" data-tpl="weekly"></div>
+        <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="weekly">Copy text</button></div>
+      </article>
+
+      <article class="tk-card">
+        <span class="tk-when">The night of the open house</span>
+        <h3>Open house follow-up</h3>
+        <p>Send it to everyone who signed in. Put their name in where it's highlighted.</p>
+        <div class="tk-msg" data-tpl="openhouse"></div>
+        <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="openhouse">Copy text</button></div>
+      </article>
+
+      <article class="tk-card">
+        <span class="tk-when">Closing day</span>
+        <h3>The review ask</h3>
+        <p>Send it while the sold sign is still in the yard. It's the first thing your next seller reads.</p>
+        <div class="tk-mini"><div class="tk-field"><label for="f-review">Your review link</label><input class="tk-input" id="f-review" data-f="review" placeholder="Paste your Google or Zillow review link" inputmode="url"></div></div>
+        <div class="tk-msg" data-tpl="review"></div>
+        <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="review">Copy text</button></div>
+      </article>
+    </div>
+
+    <!-- OFFER MODULE: agent layer only, never on seller pages. -->
+    <aside class="tk-offer" id="tk-offer">
+      <span class="eyebrow">New to Altus Aerials?</span>
+      <h2>Your first Showcase shoot is on me.</h2>
+      <p>Aerial photos plus full interiors, delivered within 24 hours. One free first shoot per agent.</p>
+      <div class="btns">
+        <a class="btn btn-light" href="sms:+17087780566?&amp;body=Hi%20Hadi%2C%20I%27d%20like%20to%20claim%20my%20free%20first%20Showcase%20shoot.">Claim your free shoot</a>
+        <a class="btn btn-ghost" href="/services">See the packages</a>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="/"><img src="/assets/images/logo-white.png" alt="" width="50" height="32"><span>Altus Aerials</span></a>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="/">Home</a><a href="/services">Packages</a><a href="/about">About</a><a href="/book">Book</a>
+      </nav>
+      <div class="socials">
+        <a href="https://www.instagram.com/altusaerials/" aria-label="Altus Aerials on Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-contact">
+      <a href="mailto:hadi@altusaerials.com">hadi@altusaerials.com</a>
+      <a href="tel:+17087780566">(708) 778-0566</a>
+    </div>
+    <p class="foot-bottom">&copy; 2026 Altus Aerials LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ======== Message templates: edit wording here. {field} fills from the inputs. ========
+  var TPL = {
+    prep: "Hi {seller}! Your photo shoot is set for {shootday}. Here's a quick guide to get the house camera-ready. It only takes a few minutes to read, and it makes a big difference in how the photos turn out:\n{prepLink}\n\nAny questions, just text me.\n{agent}",
+    live: "Hi {seller}, your home is officially live! Here's the listing:\n{link}\n\nThe first few days are when the most buyers are looking. If you ever want a quick update on views or showings, just ask.\n{agent}",
+    weekly: "Hi {seller}, here's a quick update on {address}:\n\nViews: {views}\nSaves: {saves}\nShowings: {showings}\nFeedback: {feedback}\n\nNext step: {next}\n\nLet me know if you have any questions.\n{agent}",
+    openhouse: "Hi {visitor}, thanks for stopping by the open house at {address} today! Any questions about the home, or want to see it again privately? Happy to help.\n{agent}",
+    review: "Hi {seller}, congratulations again on closing! It was a pleasure working with you. If you have a minute, a quick review would mean a lot:\n{review}\n\nThank you!\n{agent}"
+  };
+  var HINT = { agent: "your name", seller: "seller's name", address: "address", link: "listing link", shootday: "shoot day",
+    views: "views", saves: "saves", showings: "showings", feedback: "feedback", next: "next step", review: "review link", visitor: "visitor's name" };
+  var KEY = "altus-toolkit-v1";
+
+  // Seller guide link: the live site uses /seller-prep?from=Name; previews fall back to the local file.
+  var onSite = /altusaerials\.com$/.test(location.hostname) || /netlify\.app$/.test(location.hostname) || location.hostname === "localhost";
+  function prepBase() { return onSite ? location.origin + "/seller-prep" : "seller-prep.html"; }
+
+  var data = {};
+  try { data = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+
+  function val(k) { return (data[k] || "").trim(); }
+  function prepLink() { var a = val("agent"); return prepBase() + (a ? "?from=" + encodeURIComponent(a) : ""); }
+  function build(key, html) {
+    return TPL[key].replace(/\{(\w+)\}/g, function (_, k) {
+      var v;
+      if (k === "prepLink") v = prepLink();
+      else v = val(k);
+      if (!v) {
+        var h = "[" + (HINT[k] || k) + "]";
+        return html ? "<mark>" + esc(h) + "</mark>" : h;
+      }
+      return html ? esc(v) : v;
+    }).replace(/ \n/g, "\n");
+  }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function render() {
+    document.querySelectorAll("[data-tpl]").forEach(function (el) { el.innerHTML = build(el.getAttribute("data-tpl"), true); });
+    var open = document.getElementById("tk-prep-open"); if (open) open.href = prepLink();
+  }
+  document.querySelectorAll("[data-f]").forEach(function (el) {
+    var k = el.getAttribute("data-f");
+    el.value = data[k] || "";
+    el.addEventListener("input", function () { data[k] = el.value; save(); render(); });
+  });
+  render();
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest(".tk-copy"); if (!b) return;
+    var text = build(b.getAttribute("data-copy"), false);
+    function done() { b.classList.add("is-copied"); b.textContent = "Copied"; setTimeout(function () { b.classList.remove("is-copied"); b.textContent = "Copy text"; }, 1600); }
+    function fallback() {
+      var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (err) {} document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  });
+
+})();
+</script>
+</body>
+</html>
