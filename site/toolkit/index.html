@@ -183,7 +183,7 @@
       <article class="tk-card">
         <span class="tk-when">The night of the open house</span>
         <h3>Open house follow-up</h3>
-        <p>Send it to everyone who signed in. Put their name in where it says [Name].</p>
+        <p>Send it to everyone who signed in. Put their name in where it's highlighted.</p>
         <div class="tk-msg" data-tpl="openhouse"></div>
         <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="openhouse">Copy text</button></div>
       </article>
@@ -237,11 +237,11 @@
     prep: "Hi {seller}! Your photo shoot is set for {shootday}. Here's a quick guide to get the house camera-ready. It only takes a few minutes to read, and it makes a big difference in how the photos turn out:\n{prepLink}\n\nAny questions, just text me.\n{agent}",
     live: "Hi {seller}, your home is officially live! Here's the listing:\n{link}\n\nThe first few days are when the most buyers are looking. If you ever want a quick update on views or showings, just ask.\n{agent}",
     weekly: "Hi {seller}, here's a quick update on {address}:\n\nViews: {views}\nSaves: {saves}\nShowings: {showings}\nFeedback: {feedback}\n\nNext step: {next}\n\nLet me know if you have any questions.\n{agent}",
-    openhouse: "Hi [Name], thanks for stopping by the open house at {address} today! Any questions about the home, or want to see it again privately? Happy to help.\n{agent}",
+    openhouse: "Hi {visitor}, thanks for stopping by the open house at {address} today! Any questions about the home, or want to see it again privately? Happy to help.\n{agent}",
     review: "Hi {seller}, congratulations again on closing! It was a pleasure working with you. If you have a minute, a quick review would mean a lot:\n{review}\n\nThank you!\n{agent}"
   };
   var HINT = { agent: "your name", seller: "seller's name", address: "address", link: "listing link", shootday: "shoot day",
-    views: "views", saves: "saves", showings: "showings", feedback: "feedback", next: "next step", review: "review link" };
+    views: "views", saves: "saves", showings: "showings", feedback: "feedback", next: "next step", review: "review link", visitor: "visitor's name" };
   var KEY = "altus-toolkit-v1";
 
   // Seller guide link: the live site uses /seller-prep?from=Name; previews fall back to the local file.
@@ -258,10 +258,8 @@
     return TPL[key].replace(/\{(\w+)\}/g, function (_, k) {
       var v;
       if (k === "prepLink") v = prepLink();
-      else if (k === "featureLine") { var f = val("feature"); v = f ? "We'll miss " + f + "." : ""; }
       else v = val(k);
       if (!v) {
-        if (k === "featureLine") return "";
         var h = "[" + (HINT[k] || k) + "]";
         return html ? "<mark>" + esc(h) + "</mark>" : h;
       }
