@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Getting Your Home Ready for Photos</title>
+<meta name="description" content="A simple guide to getting your home ready for listing photos: a few days before, the night before, and the morning of.">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting your home ready for photos">
+<meta property="og:description" content="A quick guide from your agent: a few days before, the night before, and the morning of.">
+<meta property="og:image" content="https://altusaerials.com/assets/images/portfolio/twilight-rado-1200.jpg">
+<meta name="theme-color" content="#f6f8fb">
+<link rel="icon" href="/assets/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Seller-facing: light, calm, the agent is the headline. Altus is a small credit. */
+:root {
+  --paper: #f6f8fb; --card: #ffffff; --ink: #101828; --muted: #5b6474; --line: #e4e8ef;
+  --navy: #0b2545; --blue: #2f6fe0; --blue-soft: #e8f0ff;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+.sp-wrap { width: 100%; max-width: 640px; margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px)); }
+
+.sp-top { padding: calc(18px + env(safe-area-inset-top, 0px)) 0 0; }
+.sp-top img { height: 22px; width: auto; opacity: .85; }
+
+.sp-hero { padding: 26px 0 8px; }
+.sp-from { display: inline-block; margin: 0 0 14px; padding: 6px 12px; border-radius: 999px; background: var(--blue-soft); color: var(--navy); font: 500 13px/1.2 var(--sans); }
+.sp-from[hidden] { display: none; }
+.sp-hero h1 { margin: 0; font: 400 clamp(34px, 9.5vw, 48px)/1.05 var(--serif); letter-spacing: -.015em; color: var(--navy); text-wrap: balance; }
+.sp-hero p { margin: 14px 0 0; font-size: 17px; color: var(--muted); max-width: 52ch; }
+.sp-photo { margin: 22px 0 0; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: #dfe6f0; }
+.sp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sp-photo + .sp-cap { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+.sp-steps { display: grid; gap: 14px; padding: 26px 0 8px; }
+.sp-step { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 20px 8px; }
+.sp-step h2 { margin: 0; font: 500 22px/1.2 var(--serif); color: var(--navy); }
+.sp-step .when { display: block; margin-bottom: 6px; font: 600 11px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
+.sp-step ul { list-style: none; margin: 10px 0 0; padding: 0; }
+.sp-step li { position: relative; padding: 11px 0 11px 30px; border-top: 1px solid var(--line); }
+.sp-step li::before { content: ""; position: absolute; left: 2px; top: 16px; width: 14px; height: 14px; border: 2px solid var(--blue); border-radius: 50%; }
+.sp-step li b { font-weight: 600; }
+.sp-step li span { display: block; font-size: 14px; color: var(--muted); }
+
+.sp-note { margin: 18px 0 0; padding: 18px 20px; border-radius: 14px; background: var(--navy); color: #fff; }
+.sp-note p { margin: 0; }
+.sp-note p + p { margin-top: 8px; color: rgba(255,255,255,.75); font-size: 15px; }
+
+.sp-foot { padding: 28px 0 calc(32px + env(safe-area-inset-bottom, 0px)); text-align: center; font-size: 13px; color: var(--muted); }
+.sp-foot a { color: var(--muted); }
+
+@media print {
+  body { background: #fff; }
+  .sp-photo, .sp-photo + .sp-cap { display: none; }
+  .sp-step { break-inside: avoid; border-color: #ccc; }
+  .sp-note { background: none; color: #000; border: 1px solid #ccc; }
+  .sp-note p + p { color: #333; }
+}
+</style>
+</head>
+<body>
+<div class="sp-wrap">
+  <div class="sp-top"><img src="/assets/images/logo.png" alt="Altus Aerials"></div>
+
+  <header class="sp-hero">
+    <span class="sp-from" id="sp-from" hidden></span>
+    <h1>Getting your home ready for photos</h1>
+    <p>Your photos are the first showing. Most buyers will see your home on their phone before they ever see it in person, so a little prep goes a long way.</p>
+    <div class="sp-photo"><img src="/assets/images/portfolio/twilight-rado-800.jpg" alt="A two-story home at dusk with warm lights on inside" width="800" height="450"></div>
+  </header>
+
+  <main class="sp-steps">
+    <section class="sp-step">
+      <span class="when">A few days before</span>
+      <h2>The bigger stuff</h2>
+      <ul>
+        <li><b>Fix the small things</b><span>Burnt-out bulbs, sticky doors, dripping faucets.</span></li>
+        <li><b>Mow, edge and clear the yard</b><span>Put away hoses, toys and yard tools.</span></li>
+        <li><b>Put away personal photos</b><span>Along with kids' art, mail and anything with names on it.</span></li>
+        <li><b>Clear the counters</b><span>Leave one or two nice pieces in the kitchen and baths.</span></li>
+      </ul>
+    </section>
+
+    <section class="sp-step">
+      <span class="when">The night before</span>
+      <h2>Clean and tidy</h2>
+      <ul>
+        <li><b>Wipe windows, mirrors and counters</b><span>The camera picks up streaks and spots.</span></li>
+        <li><b>Make every bed</b><span>Smooth covers, pillows fluffed.</span></li>
+        <li><b>Hide the everyday</b><span>Toys, pet bowls, shoes, laundry baskets, cords.</span></li>
+        <li><b>Empty the trash</b><span>Put bins in the garage or out of sight.</span></li>
+      </ul>
+    </section>
+
+    <section class="sp-step">
+      <span class="when">The morning of</span>
+      <h2>Right before we arrive</h2>
+      <ul>
+        <li><b>Turn on every light</b><span>Including lamps and the ones over the stove and vanity.</span></li>
+        <li><b>Open all blinds the same way</b><span>All the way up, or all angled the same.</span></li>
+        <li><b>Move the cars</b><span>Off the driveway and away from the front of the house.</span></li>
+        <li><b>Bathrooms</b><span>Close toilet lids. Put away soap, toothbrushes and towels.</span></li>
+        <li><b>Pets</b><span>Out of the house if you can, or in one room we'll skip.</span></li>
+      </ul>
+    </section>
+
+    <div class="sp-note">
+      <p>During the shoot, we'll move room to room. It's easiest if you step out for a bit or stay in one spot.</p>
+      <p>Questions? Just text your agent.</p>
+    </div>
+  </main>
+
+  <footer class="sp-foot">
+    Photo prep guide by Altus Aerials &middot; <a href="https://altusaerials.com">altusaerials.com</a>
+  </footer>
+</div>
+<script>
+(function () {
+  // "Prepared for you by [agent]" from ?from=Name (sent by the agent toolkit)
+  try {
+    var name = new URLSearchParams(location.search).get("from");
+    if (name) {
+      name = name.trim().slice(0, 60);
+      var el = document.getElementById("sp-from");
+      el.textContent = "Prepared for you by " + name;
+      el.hidden = false;
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
