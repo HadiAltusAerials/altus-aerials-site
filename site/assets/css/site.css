@@ -315,6 +315,13 @@ h2.section-title { font-size: clamp(32px, 6vw, 56px); line-height: 1.05; }
   .pkg-copy { padding: 40px 44px; justify-content: center; }
   .pkg-copy .btn { align-self: flex-start; }
 }
+.addon { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; background: var(--white); border: 1px dashed var(--navy); border-radius: var(--radius); padding: 22px; }
+.addon-copy { flex: 1 1 280px; min-width: 0; }
+.addon-eyebrow { display: block; margin-bottom: 8px; font: 600 12px/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+.addon h2 { margin: 0 0 6px; font: 600 20px/1.25 var(--sans); color: var(--ink); }
+.addon-copy p { margin: 0; max-width: 60ch; font-size: 15px; line-height: 1.55; color: var(--ink); }
+.addon .price { margin: 0; }
+@media (min-width: 900px) { .addon { padding: 28px 44px; } }
 .unsure { background: var(--navy-deep); color: var(--white); text-align: center; padding-block: 64px 68px; }
 .unsure h2 { font-size: clamp(28px, 5vw, 42px); line-height: 1.1; }
 .unsure p { margin: 12px auto 10px; max-width: 46ch; color: var(--on-dark-muted); }
