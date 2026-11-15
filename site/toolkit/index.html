@@ -164,28 +164,19 @@
       </article>
 
       <article class="tk-card">
-        <span class="tk-when">When your seller asks for an update</span>
-        <h3>The seller update</h3>
-        <p>For when your seller asks how it's going. Fill in the numbers from your listing stats and send.</p>
-        <div class="tk-mini cols-3">
-          <div class="tk-field"><label for="f-views">Views</label><input class="tk-input" id="f-views" data-f="views" inputmode="numeric" placeholder="1,240"></div>
-          <div class="tk-field"><label for="f-saves">Saves</label><input class="tk-input" id="f-saves" data-f="saves" inputmode="numeric" placeholder="38"></div>
-          <div class="tk-field"><label for="f-showings">Showings</label><input class="tk-input" id="f-showings" data-f="showings" inputmode="numeric" placeholder="5"></div>
-        </div>
-        <div class="tk-mini">
-          <div class="tk-field"><label for="f-feedback">Feedback</label><input class="tk-input" id="f-feedback" data-f="feedback" placeholder="Buyers love the kitchen; a few asked about the basement"></div>
-          <div class="tk-field"><label for="f-next">Next step</label><input class="tk-input" id="f-next" data-f="next" placeholder="Open house Sunday 1 to 3"></div>
-        </div>
-        <div class="tk-msg" data-tpl="weekly"></div>
-        <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="weekly">Copy text</button></div>
-      </article>
-
-      <article class="tk-card">
         <span class="tk-when">The night of the open house</span>
         <h3>Open house follow-up</h3>
         <p>Send it to everyone who signed in. Put their name in where it's highlighted.</p>
         <div class="tk-msg" data-tpl="openhouse"></div>
         <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="openhouse">Copy text</button></div>
+      </article>
+
+      <article class="tk-card">
+        <span class="tk-when">If it's sitting</span>
+        <h3>The plan before price</h3>
+        <p>For when showings slow down and your seller starts asking about a price cut. Send it before that conversation.</p>
+        <div class="tk-msg" data-tpl="sitting"></div>
+        <div class="tk-btns"><button class="btn btn-light tk-copy" type="button" data-copy="sitting">Copy text</button></div>
       </article>
 
       <article class="tk-card">
@@ -236,12 +227,12 @@
   var TPL = {
     prep: "Hi {seller}! Your photo shoot is set for {shootday}. Here's a quick guide to get the house camera-ready. It only takes a few minutes to read, and it makes a big difference in how the photos turn out:\n{prepLink}\n\nAny questions, just text me.\n{agent}",
     live: "Hi {seller}, your home is officially live! Here's the listing:\n{link}\n\nThe first few days are when the most buyers are looking. If you ever want a quick update on views or showings, just ask.\n{agent}",
-    weekly: "Hi {seller}, here's a quick update on {address}:\n\nViews: {views}\nSaves: {saves}\nShowings: {showings}\nFeedback: {feedback}\n\nNext step: {next}\n\nLet me know if you have any questions.\n{agent}",
     openhouse: "Hi {visitor}, thanks for stopping by the open house at {address} today! Any questions about the home, or want to see it again privately? Happy to help.\n{agent}",
+    sitting: "Hi {seller}, quick update on {address}. Showings have slowed down a bit, so here's the plan for this week. I'm switching up the cover photo, reordering the pictures, and relisting it so it pops up as new again for buyers. It doesn't cost us anything, and I'd rather try this before we talk about lowering the price. Let's see how this week goes and catch up after.\n{agent}",
     review: "Hi {seller}, congratulations again on closing! It was a pleasure working with you. If you have a minute, a quick review would mean a lot:\n{review}\n\nThank you!\n{agent}"
   };
   var HINT = { agent: "your name", seller: "seller's name", address: "address", link: "listing link", shootday: "shoot day",
-    views: "views", saves: "saves", showings: "showings", feedback: "feedback", next: "next step", review: "review link", visitor: "visitor's name" };
+    review: "review link", visitor: "visitor's name" };
   var KEY = "altus-toolkit-v1";
 
   // Seller guide link: the live site uses /seller-prep?from=Name; previews fall back to the local file.
