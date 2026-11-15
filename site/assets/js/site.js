@@ -119,3 +119,12 @@
   } else start();
   window.addEventListener("load", function () { window.ScrollTrigger.refresh(); });
 })();
+
+// ---------- Virtual staging: pick a package first ----------
+(function () {
+  var openBtn = document.getElementById("staging-open");
+  var dlg = document.getElementById("staging-pick");
+  if (!openBtn || !dlg || typeof dlg.showModal !== "function") return; // falls back to the plain link
+  openBtn.addEventListener("click", function (e) { e.preventDefault(); dlg.showModal(); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); }); // tap outside to close
+})();

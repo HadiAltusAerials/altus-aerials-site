@@ -100,14 +100,23 @@
         <div class="addon-copy">
           <span class="addon-eyebrow">Add-on for Showcase, Signature or Summit</span>
           <h2 id="addon-staging">Virtual Staging</h2>
-          <p>An empty room is hard to read online. Buyers can&rsquo;t tell how big it is or where the couch goes, so they keep scrolling. <strong>83% of buyers&rsquo; agents say staging makes it easier for buyers to picture the home as theirs.</strong> We furnish the key rooms that sell a home, so a vacant listing doesn&rsquo;t look vacant.</p>
-          <p class="addon-src">Source: NAR 2025 Profile of Home Staging</p>
+          <p>Empty rooms are hard to read online. We furnish the key rooms that sell a home, so buyers can picture living there.</p>
         </div>
         <div class="addon-cta">
           <p class="price"><sup>$</sup>50</p>
-          <a class="btn btn-primary" href="/book?staging=1#shoot-form">Add it to your booking</a>
+          <a class="btn btn-primary" id="staging-open" href="/book?staging=1#shoot-form">Add it to your booking</a>
         </div>
       </aside>
+      <dialog class="pick-dialog" id="staging-pick" aria-labelledby="staging-pick-title">
+        <form method="dialog" class="pick-close-form"><button class="pick-x" aria-label="Close">&times;</button></form>
+        <h2 id="staging-pick-title">Choose a package first</h2>
+        <p>Virtual staging is added to one of these. Pick yours and we&rsquo;ll take you to booking with staging already checked.</p>
+        <div class="pick-options">
+          <a class="pick-opt" href="/book?package=Showcase&amp;staging=1#shoot-form"><span>Showcase</span><span>$349</span></a>
+          <a class="pick-opt" href="/book?package=Signature&amp;staging=1#shoot-form"><span>Signature</span><span>$499</span></a>
+          <a class="pick-opt" href="/book?package=Summit&amp;staging=1#shoot-form"><span>Summit</span><span>$649</span></a>
+        </div>
+      </dialog>
     </div>
   </section>
   <section class="video-menu" id="video-menu" aria-labelledby="vm-title">
