@@ -231,6 +231,8 @@
           return lines.join("\n");
         })(),
         referral: formData.get("referral_source"),
+        staging: !!formData.get("staging") && formData.get("package") !== "Overview",
+        videoStyle2: formData.get("package") === "Summit" ? (formData.get("video_style_2") || "") : "",
       };
 
       submitBtn.disabled = true;
@@ -278,6 +280,8 @@
           redirectParams.set("bookingId", result.data.bookingId);
           redirectParams.set("date", holdPayload.date);
           redirectParams.set("time", holdPayload.time);
+          if (result.data.total) redirectParams.set("total", String(result.data.total));
+          if (result.data.checkoutUrl) redirectParams.set("pay", result.data.checkoutUrl);
           window.location.href = "/book-shoot-confirm.html?" + redirectParams.toString();
         })
         .catch(function () {

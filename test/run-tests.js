@@ -186,6 +186,59 @@ async function main() {
     assert.strictEqual(JSON.parse(res.body).error, "invalid_package");
   });
 
+  await test("pricing: package alone, plus staging, plus second video", async () => {
+    const p = createHoldFn.priceBooking;
+    assert.strictEqual(p("Signature", {}).total, 499);
+    assert.strictEqual(p("Signature", { staging: true }).total, 549);
+    assert.strictEqual(p("Overview", { staging: true }).total, 149, "Overview can't take staging");
+    assert.strictEqual(p("Showcase", { videoStyle2: "Walkthrough" }).total, 349, "second video is Summit-only");
+    assert.strictEqual(p("Summit", { staging: true, videoStyle2: "Walkthrough" }).total, 849);
+    assert.strictEqual(p("Summit", { staging: "true" }).total, 649, "staging must be a real boolean");
+  });
+
+  await test("create-hold: no Stripe key -> no checkout URL, total still returned", async () => {
+    delete process.env.STRIPE_SECRET_KEY;
+    const res = await createHoldFn.handler({
+      httpMethod: "POST",
+      body: JSON.stringify(Object.assign({}, holdPayload, { date: "2026-12-14", time: "09:00", package: "Signature", staging: true, email: "s1@example.com" })),
+    });
+    const body = JSON.parse(res.body);
+    assert.strictEqual(res.statusCode, 200, res.body);
+    assert.strictEqual(body.total, 549);
+    assert.strictEqual(body.checkoutUrl, null);
+  });
+
+  await test("create-hold: with a Stripe key, creates a checkout for the exact total", async () => {
+    let captured = null;
+    createHoldFn._setStripeFactory(() => ({ checkout: { sessions: { create: async (args) => { captured = args; return { url: "https://checkout.stripe.com/c/pay/cs_test_123" }; } } } }));
+    process.env.STRIPE_SECRET_KEY = "sk_test_fake";
+    const res = await createHoldFn.handler({
+      httpMethod: "POST",
+      body: JSON.stringify(Object.assign({}, holdPayload, { date: "2026-12-14", time: "11:00", package: "Summit", staging: true, videoStyle2: "Walkthrough", email: "s2@example.com" })),
+    });
+    delete process.env.STRIPE_SECRET_KEY;
+    const body = JSON.parse(res.body);
+    assert.strictEqual(res.statusCode, 200, res.body);
+    assert.strictEqual(body.checkoutUrl, "https://checkout.stripe.com/c/pay/cs_test_123");
+    const cents = captured.line_items.reduce((s, li) => s + li.price_data.unit_amount, 0);
+    assert.strictEqual(cents, 84900);
+    assert.strictEqual(captured.client_reference_id, body.bookingId);
+  });
+
+  await test("create-hold: Stripe error falls back cleanly (hold still made)", async () => {
+    createHoldFn._setStripeFactory(() => ({ checkout: { sessions: { create: async () => { throw new Error("boom"); } } } }));
+    process.env.STRIPE_SECRET_KEY = "sk_test_fake";
+    const res = await createHoldFn.handler({
+      httpMethod: "POST",
+      body: JSON.stringify(Object.assign({}, holdPayload, { date: "2026-12-14", time: "13:00", package: "Showcase", email: "s3@example.com" })),
+    });
+    delete process.env.STRIPE_SECRET_KEY;
+    const body = JSON.parse(res.body);
+    assert.strictEqual(res.statusCode, 200, res.body);
+    assert.strictEqual(body.checkoutUrl, null);
+    assert.strictEqual(body.total, 349);
+  });
+
   await test("stripe-webhook: rejects a bad signature", async () => {
     const res = await stripeWebhookFn.handler({
       httpMethod: "POST",

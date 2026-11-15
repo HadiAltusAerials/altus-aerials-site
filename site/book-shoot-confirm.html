@@ -124,9 +124,22 @@
     var time = params.get("time");
     var info = pkg ? PACKAGES[pkg] : null;
     var card = document.getElementById("payment-card");
+
+    // Back from a completed Stripe Checkout.
+    if (card && params.get("paid") === "1") {
+      card.innerHTML = "<h3>You're booked!</h3><p style=\"color:var(--muted);\">Payment received. A receipt is on its way to your email, and I'll be in touch before the shoot.</p>";
+      return;
+    }
     if (!card || !info) return;
 
-    var heading = pkg + " &mdash; $" + info.price;
+    // Exact total (package + add-ons) and its Stripe Checkout, when the
+    // server created one. Only trust real Stripe Checkout URLs.
+    var total = parseInt(params.get("total"), 10);
+    if (!(total >= info.price)) total = info.price;
+    var checkout = params.get("pay") || "";
+    if (checkout.indexOf("https://checkout.stripe.com/") !== 0) checkout = "";
+
+    var heading = pkg + " &mdash; $" + total;
     if (date && time) {
       heading += " &middot; " + escapeHtml(formatDate(date)) + " at " + escapeHtml(formatTime(time));
     }
@@ -134,9 +147,12 @@
     var html = "<h3>" + heading + "</h3>" +
       "<p style=\"color:var(--muted);margin-bottom:24px;\">This time is being held for you for the next 20 minutes. Complete payment below to lock it in for good &mdash; if payment isn't completed in time, the hold releases automatically and the slot opens back up.</p>";
 
-    if (info.link && bookingId) {
+    if (checkout) {
+      html += "<a class=\"btn btn-primary\" href=\"" + escapeHtml(checkout) + "\">Pay $" + total + " to Lock In Your Booking</a>";
+    } else if (info.link && bookingId) {
       var payUrl = info.link + (info.link.indexOf("?") === -1 ? "?" : "&") + "client_reference_id=" + encodeURIComponent(bookingId);
       html += "<a class=\"btn btn-primary\" href=\"" + payUrl + "\" target=\"_blank\" rel=\"noopener\">Pay $" + info.price + " to Lock In Your Booking</a>";
+      if (total > info.price) html += "<p style=\"color:var(--muted);margin-top:16px;\">Your add-ons ($" + (total - info.price) + ") will be collected after the shoot.</p>";
     } else {
       html += "<p style=\"color:var(--muted);\">We'll send you a secure payment link by email shortly to finish locking in your booking.</p>";
     }
