@@ -92,6 +92,21 @@
         if (style2Select) style2Select.value = "";
       }
     };
+    // ---- Virtual staging add-on (Showcase, Signature, Summit only) ----
+    var stagingField = document.getElementById("staging-field");
+    var stagingBox = document.getElementById("shoot-staging");
+    if (stagingBox && params.get("staging") === "1") stagingBox.checked = true;
+    var syncStaging = function () {
+      if (!stagingField || !stagingBox) return;
+      var pkg = packageSelect.value;
+      var allowed = pkg === "Showcase" || pkg === "Signature" || pkg === "Summit";
+      stagingField.hidden = !allowed;
+      if (pkg === "Overview") stagingBox.checked = false;
+    };
+    packageSelect.addEventListener("change", syncStaging);
+    packageButtons.forEach(function (btn) { btn.addEventListener("click", syncStaging); });
+    syncStaging();
+
     packageSelect.addEventListener("change", syncVideoStyle);
     packageButtons.forEach(function (btn) { btn.addEventListener("click", syncVideoStyle); });
     syncVideoStyle();
@@ -206,10 +221,14 @@
         shootType: formData.get("shoot_type"),
         notes: (function () {
           var n = formData.get("notes") || "";
+          var lines = [];
           var v1 = formData.get("video_style"), v2 = formData.get("video_style_2");
-          if (formData.get("package") !== "Summit" || !v1) return n;
-          var line = "Video style: " + v1 + (v2 ? " + second style: " + v2 + " (+$150)" : "");
-          return n ? line + "\n" + n : line;
+          if (formData.get("package") === "Summit" && v1) {
+            lines.push("Video style: " + v1 + (v2 ? " + second style: " + v2 + " (+$150)" : ""));
+          }
+          if (formData.get("staging") && formData.get("package") !== "Overview") lines.push("Add-on: Virtual staging (+$50)");
+          if (n) lines.push(n);
+          return lines.join("\n");
         })(),
         referral: formData.get("referral_source"),
       };
