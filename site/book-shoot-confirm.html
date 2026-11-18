@@ -2,80 +2,81 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Secure Your Booking | Altus Aerials</title>
 <meta name="description" content="Complete payment to secure your Altus Aerials booking.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#071a33">
 <link rel="icon" href="/assets/images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/main.js" defer></script>
 </head>
-<body>
-
-<header class="site-header">
+<body class="page-inner page-form">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
   <div class="wrap">
-    <nav class="nav-links">
-      <a href="/">Home</a>
-      <a href="/services.html">Services</a>
-      <a href="/about.html">About</a>
+    <a class="brand" href="/"><img src="/assets/images/logo-white.png" alt="" width="50" height="32"><span>Altus Aerials</span></a>
+    <nav class="nav" aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/services">Packages</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+      <a class="btn btn-light nav-cta" href="/book">Book a shoot</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     </nav>
-    <a href="/" class="brand"><img src="/assets/images/logo-white.png" alt="Altus Aerials logo"> <span class="brand-text">Altus Aerials</span></a>
-    <div class="header-right">
-      <div class="socials">
-        <a href="https://www.instagram.com/altusaerials/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-        
-        
-      </div>
-      <a href="/book.html" class="btn nav-cta">Book Now</a>
-    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <ul>
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/services">Packages</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/book">Book a shoot</a></li>
+    </ul>
   </div>
 </header>
-
-<section class="contact-hero">
-  <div class="wrap">
-    <span style="text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:600;color:var(--blue-accent);">Almost There</span>
-    <h1>Secure Your Booking</h1>
-    <p>We've received your request. Complete payment below to lock in your booking.</p>
-  </div>
-</section>
-
-<section class="reveal" style="padding-top:0;">
-  <div class="wrap" style="max-width:560px;padding:70px 24px 110px;">
-    <div class="contact-card" id="payment-card">
-      <h3>Thanks for your request!</h3>
-      <p style="color:var(--muted);">We've got your details and will reach out shortly to confirm your booking and arrange payment.</p>
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Almost there</span>
+      <h1>Secure your booking</h1>
+      <p class="lede">I've got your request. Complete payment below to lock in your date.</p>
     </div>
-    <p style="margin-top:24px;color:var(--muted);font-size:14px;">Need to change your date or details? Email <a href="mailto:hadi@altusaerials.com">hadi@altusaerials.com</a> or call <a href="tel:+17087780566">(708) 778-0566</a>.</p>
-  </div>
-</section>
-
-<footer>
+  </section>
+  <section style="padding-block:48px 96px;">
+    <div class="wrap" style="max-width:640px;">
+      <div class="contact-card" id="payment-card">
+        <h2>Thanks for your request!</h2>
+        <p style="color:var(--muted);">I've got your details and will reach out shortly to confirm your booking and arrange payment.</p>
+      </div>
+      <p style="margin-top:24px;color:var(--muted);font-size:14px;">Need to change your date or details? Email <a class="text-link" href="mailto:hadi@altusaerials.com">hadi@altusaerials.com</a> or call <a class="text-link" href="tel:+17087780566">(708) 778-0566</a>.</p>
+    </div>
+  </section>
+</main>
+<footer class="site-foot">
   <div class="wrap">
-    <div class="footer-top">
-      <a href="/" class="brand"><img src="/assets/images/logo-white.png" alt="Altus Aerials logo"> Altus Aerials</a>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/services.html">Services</a>
-        <a href="/about.html">About</a>
-        <a href="/book.html">Contact</a>
-        <a href="/consultation.html">Consultation</a>
+    <div class="foot-top">
+      <a class="brand" href="/"><img src="/assets/images/logo-white.png" alt="" width="50" height="32"><span>Altus Aerials</span></a>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="/">Home</a><a href="/services">Packages</a><a href="/about">About</a><a href="/book">Book</a><a href="/consultation">Consultation</a>
       </nav>
       <div class="socials">
-        <a href="https://www.instagram.com/altusaerials/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://www.instagram.com/altusaerials/" aria-label="Altus Aerials on Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
         
         
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Altus Aerials. All rights reserved.</span>
-      <span>hadi@altusaerials.com &middot; (708) 778-0566</span>
+    <div class="foot-contact">
+      <a href="mailto:hadi@altusaerials.com">hadi@altusaerials.com</a>
+      <a href="tel:+17087780566">(708) 778-0566</a>
     </div>
+    <p class="foot-bottom">&copy; 2026 Altus Aerials LLC. All rights reserved.</p>
   </div>
 </footer>
-
-<script src="/assets/js/main.js" defer></script>
 <script>
   // ---------------------------------------------------------------
   // Once you've created a Stripe Payment Link for each package
@@ -89,10 +90,7 @@
       "Overview":               { price: 149, link: "https://buy.stripe.com/8x25kD3Sw2YM3JS7Nu1ck01" },
       "Showcase":                { price: 349, link: "https://buy.stripe.com/6oU00jgFi56U1BK5Fm1ck02" },
       "Signature":                { price: 499, link: "https://buy.stripe.com/fZubJ19cQbvidksaZG1ck03" },
-      "Summit":                    { price: 649, link: "https://buy.stripe.com/3cI6oH1Ko42Q5S03xe1ck04" },
-      "Inspection":                 { price: 129, link: "https://buy.stripe.com/6oU3cv0Gk42QgwE4Bi1ck05" },
-      "Claim Documentation":         { price: 179, link: "https://buy.stripe.com/6oU7sLcp2fLy0xG6Jq1ck06" },
-      "Progress Documentation":       { price: 299, link: "https://buy.stripe.com/eVq3cv4WA0QEcgo5Fm1ck07" }
+      "Summit":                    { price: 649, link: "https://buy.stripe.com/3cI6oH1Ko42Q5S03xe1ck04" }
     };
 
     var escapeHtml = function (str) {
@@ -154,7 +152,7 @@
       html += "<a class=\"btn btn-primary\" href=\"" + payUrl + "\" target=\"_blank\" rel=\"noopener\">Pay $" + info.price + " to Lock In Your Booking</a>";
       if (total > info.price) html += "<p style=\"color:var(--muted);margin-top:16px;\">Your add-ons ($" + (total - info.price) + ") will be collected after the shoot.</p>";
     } else {
-      html += "<p style=\"color:var(--muted);\">We'll send you a secure payment link by email shortly to finish locking in your booking.</p>";
+      html += "<p style=\"color:var(--muted);\">I'll send you a secure payment link by email shortly to finish locking in your booking.</p>";
     }
     card.innerHTML = html;
   })();

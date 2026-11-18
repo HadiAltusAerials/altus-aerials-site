@@ -139,7 +139,7 @@
   var API = (window.ALTUS_API || location.origin).replace(/\/$/, "");
   var $ = function (id) { return document.getElementById(id); };
   var form = $("rebook"), slug = new URLSearchParams(location.search).get("g") || "";
-  var WINDOWS = ["Morning", "Afternoon", "Twilight", "Flexible"];
+  var WINDOWS = ["Morning", "Afternoon", "Flexible"];
   $("from").value = slug;
   var t = new Date(); t.setDate(t.getDate() + 1);
   $("date").min = t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0");
